@@ -95,15 +95,6 @@ class Factory
         return new ImplOne();
     }
 };
-
-class AutoFactory
-{
-public:
-    static Api* createApi(){
-        return static_cast<Api*>(ObjectFactory::createObject("ImplTwo"));
-    }
-};
-
 void TestFactory()
 {
     //实现了客户端调用和ImplOne, ImplTwo的解耦合
@@ -112,6 +103,24 @@ void TestFactory()
 
     Api* api2 = Factory::createApi();
     api2->test("data from txt");
+}
+
+class AutoFactory
+{
+public:
+    //在实例开发中，可通过配置文件，来决定是创建“ImplOne"还是”ImplTwo"对象。
+    static Api* createApi(){
+        return static_cast<Api*>(ObjectFactory::createObject("ImplTwo"));
+    }
+};
+
+void TestAutoFactory()
+{
+    Api* pApi = AutoFactory::createApi();
+    if(pApi)
+    {
+	    pApi->test("xml");
+    }
 }
 
 void TestCreateMacro()
@@ -133,12 +142,7 @@ void TestCreateMacro()
 
 int main()
 {
-    Api* pApi = AutoFactory::createApi();
-    if(pApi)
-    {
-	    pApi->test("xml");
-    }
-
+    TestAutoFactory();
     TestCreateMacro();
     return 0;
 }
