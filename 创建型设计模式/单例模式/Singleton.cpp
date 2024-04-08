@@ -17,8 +17,7 @@ public:
     Singleton &operator=(Singleton &&) = delete;
 
 protected:
-    Singleton() {}
-    virtual ~Singleton(){};
+    Singleton() = default;
 };
 
 template <typename T>
