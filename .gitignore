@@ -1,0 +1,6 @@
+# ignore ALL .json and .exe files
+*.json
+*.exe
+
+# ignore ALL files in ANY directory named Debug
+Debug/
