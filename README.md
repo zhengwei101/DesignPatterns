@@ -11,16 +11,6 @@
 > Creational Patterns
 
 将对象的部分创建工作延迟到子类或其他对象。
-
-通过“对象创建” 模式绕开new，来避免对象创建（new）过程中所导致的紧耦合（依赖具体类），从而支持对象创建的稳定。它
-是接口抽象之后的第一步工作。
-
-典型模式
-
-- Factory Method
-- Abstract Factory
-- Prototype
-- Builder
   
 ## 结构型设计模式
 
@@ -34,15 +24,81 @@
 
 通过类继承或对象组合来划分类与对象间的职责。
 
-组件协作模式
+## 从封装变化角度来对模式进行分类
 
-现代软件专业分工之后的第一个结果是“框架与应用程序的划分”，“组件协作”模式通过延迟绑定，来实现框架与应用程序之间的松耦合，是二者之间协作时常用的模式。
+### 组件协作
+
+现代软件专业分工之后的第一个结果是“框架与应用程序的划分”。
+
+“组件协作”模式通过延迟绑定，来实现框架与应用程序之间的松耦合，是二者之间协作时常用的模式。
 
 典型模式
 
-- 模板方法（Template Method）
-- 观察者模式（Observer / Event）
-- 策略模式（Strategy）
+- Template Method
+- Observer / Event
+- Strategy
+
+### 单一职责
+
+典型模式
+
+- Decorator
+- Bridge
+
+### 对象创建
+
+通过“对象创建” 模式绕开new，来避免对象创建（new）过程中所导致的紧耦合（依赖具体类），从而支持对象创建的稳定。它是接口抽象之后的第一步工作。
+
+典型模式
+
+- Factory Method
+- Abstract Factory
+- Prototype
+- Builder
+
+### 对象性能
+
+典型模式
+
+- Singleton
+- Flyweight
+
+### 接口隔离
+
+典型模式
+
+- Facade
+- Proxy
+- Mediator
+- Adapter
+
+### 状态变化
+
+典型模式
+
+- Memento
+- State
+
+### 数据结构
+
+典型模式
+
+- Composite
+- Iterator
+- Chain of Resposibility
+
+### 行为变化
+
+典型模式
+
+- Command
+- Visitor
+
+### 领域问题
+
+典型模式
+
+- Interpreter
 
 ## 类模式与对象模式
 
