@@ -20,7 +20,7 @@ class FileSplitter
     std::string m_filePath;
     int m_fileNumber;
 
-    std::vector<IProgress *> m_list; // 抽象通知机制，支持多个观察者
+    std::vector<IProgress*> m_list; // 抽象通知机制，支持多个观察者
 
 public:
     FileSplitter(const std::string &filePath, int fileNumber)
@@ -45,7 +45,7 @@ public:
 
     void addIProgress(IProgress *iprogress)
     {
-        cout << std::hex << "add observer:: " << std::showbase<< iprogress << '\n';
+        cout << std::hex << "add observer:: " << std::showbase << iprogress << '\n';
         m_list.emplace_back(iprogress);
     }
 
@@ -54,6 +54,7 @@ public:
         auto is_found = [&](IProgress *iter) { return iprogress == iter; };
         if (auto it = std::find_if(begin(m_list), end(m_list), is_found); it != std::end(m_list))
         {
+            cout << std::hex << "remove observer:: " << std::showbase << *it << '\n';
             m_list.erase(it);
         }
     }
@@ -61,7 +62,7 @@ public:
 protected:
     virtual void onProgress(float value)
     {
-        for(const auto& iter : m_list)
+        for (const auto &iter : m_list)
         {
             iter->DoProgress(value); // 更新进度条
         }
@@ -75,25 +76,25 @@ public:
     virtual ~Form(){};
 };
 
-//文体控件
+// 文体控件
 class TextBox
 {
 public:
-    TextBox(const std::string& txt)
+    TextBox(const std::string &txt)
         : m_text(txt)
     {
-
     }
     std::string getText()
     {
         return m_text;
     }
     virtual ~TextBox(){};
+
 private:
     std::string m_text;
 };
 
-//滚动条控件
+// 滚动条控件
 class ProgressBar
 {
 public:
@@ -102,21 +103,21 @@ public:
         m_value = value;
     }
     virtual ~ProgressBar(){};
+
 private:
     int m_value = 0;
 };
 
-class ConsoleNotifier : public IProgress 
+class ConsoleNotifier : public IProgress
 {
 public:
-	void DoProgress(float value) override
+    void DoProgress(float value) override
     {
         cout << "Console Get value from splitter:  " << value << endl;
-		cout << "..." << endl;
-	}
+    }
 };
 
-//MainForm 继承IProgress接口
+// MainForm 继承IProgress接口
 class MainForm : public Form, public IProgress
 {
 public:
@@ -133,7 +134,6 @@ public:
         delete progressBar;
     }
 
-
     void Button1_Click()
     {
         std::string filePath = txtFilePath->getText();
@@ -142,15 +142,16 @@ public:
         ConsoleNotifier console;
 
         FileSplitter splitter(filePath, number);
-        splitter.addIProgress(this); //订阅通知
-        splitter.addIProgress(&console);//订阅通知
+        splitter.addIProgress(this);     // 观察者订阅通知
+        splitter.addIProgress(&console); // 观察者订阅通知
 
         splitter.split();
-
         splitter.removeIProgress(this);
+        splitter.split();
     }
+
 private:
-    //实现 IProgress的接口
+    // 实现 IProgress的接口
     void DoProgress(float value) override
     {
         cout << "MainForm Get value frome splitter: " << value << endl;
@@ -158,9 +159,9 @@ private:
     }
 
 private:
-    TextBox *txtFilePath = nullptr;   //文件路径
-    TextBox *txtFileNumber = nullptr; //分割文件数量
-    ProgressBar *progressBar= nullptr;
+    TextBox *txtFilePath = nullptr;   // 文件路径
+    TextBox *txtFileNumber = nullptr; // 分割文件数量
+    ProgressBar *progressBar = nullptr;
 };
 
 int main()
